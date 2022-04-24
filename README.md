@@ -1,6 +1,6 @@
 # Get all Higher Institutions from a country
 
-> React Native application with authenticatiob screens that serves all higher institutions in a selected country
+> React Native application with authentication screens that serves all higher institutions in a selected country
 
 ## Quick Start
 
