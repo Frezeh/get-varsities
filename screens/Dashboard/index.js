@@ -18,25 +18,23 @@ const NoData = () => {
 export default function Dashboard({ navigation }) {
     const [data, setData] = useState([]);
     const [country, setCountry] = useState('');
-    const [input, setInput] = useState('');
+    const [request, setRequest] = useState(false);
 
     useEffect(() => {
         const SearchCountry = async () => {
-            if (country !== '') {
-                try {
-                    return axios
-                        .get(`http://universities.hipolabs.com/search?country=${country}`)
-                        .then(data => {
-                            setData(data.data);
-                        });
-                } catch (error) {
-                    console.log(error);
-                }
+            try {
+                return axios
+                    .get(`http://universities.hipolabs.com/search?country=${country}`)
+                    .then(data => {
+                        if (request) setData(data.data);
+                    }).catch((error) => console.log(error));
+            } catch (error) {
+                console.log(error);
             }
         }
 
         SearchCountry()
-    }, [input])
+    }, [request]);
 
     return (
         <SafeAreaView>
@@ -53,7 +51,7 @@ export default function Dashboard({ navigation }) {
                 <View style={{ marginRight: 5 }}>
                     <TouchableHighlight
                         style={styles.solid}
-                        onPress={() => setInput(country)}
+                        onPress={() => setRequest(true)}
                     >
                         <Text style={styles.solidText}>{'Search'}</Text>
                     </TouchableHighlight>
